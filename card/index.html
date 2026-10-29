@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adam Bacchus · Card</title>
+<meta name="description" content="Adam Bacchus, Project Manager · PMP. Scan or tap to save the contact, call, text, email, LinkedIn, GitHub, résumé and portfolio.">
+<meta name="theme-color" content="#0b0a14">
+<meta property="og:title" content="Adam Bacchus · Project Manager · PMP">
+<meta property="og:description" content="Scan, tap or share: contact, LinkedIn, GitHub, résumé and portfolio.">
+<meta property="og:image" content="https://adambacch.us/card/img/card-front.jpg">
+<meta property="og:url" content="https://adambacch.us/card/">
+<link rel="canonical" href="https://adambacch.us/card/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='10' y='4' width='44' height='56' rx='6' fill='%23ff7a1a'/%3E%3Ctext x='32' y='42' font-family='Arial' font-weight='900' font-size='26' text-anchor='middle' fill='%23fff'%3EAB%3C/text%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Adam's card">
+<link rel="preload" as="image" href="img/card-front.webp" type="image/webp">
+<link rel="stylesheet" href="card.css?v=20261029k">
+</head>
+<body>
+<div class="bg" aria-hidden="true"><i class="glow g1"></i><i class="glow g2"></i><i class="grid"></i></div>
+
+<main class="page" id="page">
+  <header class="head">
+    <a class="home home-pill" href="/" aria-label="Back to adambacch.us, Adam’s interactive resume"><span class="hp-back" aria-hidden="true">←</span><span class="hp-dot" aria-hidden="true"></span><span>adambacch<b>.us</b></span></a>
+    <h1>Adam Bacchus <span>Project Manager · PMP</span></h1>
+  </header>
+
+  <section class="card-zone" aria-label="Business card">
+    <div class="stage" id="stage">
+      <button class="bcard" id="bcard" type="button" aria-pressed="false"
+        aria-label="Adam Bacchus business card, front. Tap to flip, press and hold to open adambacch.us.">
+        <span class="tilt" id="tilt">
+          <span class="flip">
+            <span class="face front" id="cardFront"><picture><source srcset="img/card-front.webp" type="image/webp"><img src="img/card-front.jpg" width="1049" height="599" alt="Business card front: a meeting table seen from above, Adam on the right, a sheet with the adambacch.us QR code in the middle" decoding="async"></picture></span>
+            <span class="face back" id="cardBack"><picture><source srcset="img/card-back.webp" type="image/webp"><img src="img/card-back.jpg" width="1049" height="599" alt="Business card back: a whiteboard with two checked items and a QR code to call Adam Bacchus, 832-844-7118" decoding="async"></picture></span>
+            <span class="glare" aria-hidden="true"></span>
+          </span>
+        </span>
+      </button>
+    </div>
+    <p class="card-hint" id="cardHint">Tap to flip · press and hold to open</p>
+  </section>
+
+  <section class="tiles-zone" aria-label="Ways to connect">
+    <p class="tiles-hint">Tap a logo for its QR · press and hold to open</p>
+    <div class="tiles" id="tiles"></div>
+    <div class="make-own">
+      <p class="made-with" id="madeWith" hidden>Made with <a href="/card/" target="_blank" rel="noopener">Adam Bacchus's card</a></p>
+      <div class="owner-tools" id="ownerTools" hidden><button type="button" class="make-btn" id="editBtn"><span aria-hidden="true">✎</span> Edit my card</button><button type="button" class="install-btn" id="manageBtn">Link, website files &amp; email signature</button></div>
+      <button type="button" class="make-btn" id="makeBtn"><span aria-hidden="true">✦</span> Make a card like this for yourself</button>
+      <button type="button" class="install-btn" id="installBtn" hidden><span aria-hidden="true">⊕</span> Add this card to your home screen</button>
+    </div>
+  </section>
+</main>
+
+<div class="scan" id="scan" role="dialog" aria-modal="true" aria-labelledby="scanTitle" hidden>
+  <div class="scan-sheet" id="scanSheet">
+    <button type="button" class="scan-x" id="scanClose" aria-label="Close">✕</button>
+    <p class="scan-kicker" id="scanKicker"></p>
+    <h2 id="scanTitle"></h2>
+    <div class="scan-qr" id="scanQr"></div>
+    <p class="scan-sub" id="scanSub"></p>
+    <div class="scan-nav">
+      <button type="button" id="scanPrev" aria-label="Previous code">‹</button>
+      <a id="scanOpen" target="_blank" rel="noopener">Open ↗</a>
+      <button type="button" id="scanNext" aria-label="Next code">›</button>
+    </div>
+    <p class="scan-tip">Screen stays on while this is open · swipe for the next code</p>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="qrs.js?v=20261029d"></script>
+<script src="card.js?v=20261029k"></script>
+<script src="../m.js"></script>
+</body>
+</html>
