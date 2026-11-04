@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b0a14">
+<title>Email Signature · Adam Bacchus</title>
+<style>
+  :root { --bg: #0b0a14; --muted: #a09db5; --accent: #6d5dfc; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: var(--bg); font: 14px/1.5 "Segoe UI", system-ui, sans-serif; }
+  main { width: 100%; max-width: 560px; padding: 32px 16px; }
+  .stage { background: #fff; border-radius: 14px; padding: 28px 24px; overflow-x: auto; display: flex; justify-content: center; }
+  .bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 16px; }
+  button { font: inherit; font-weight: 600; border: 0; background: var(--accent); color: #fff; padding: 9px 16px; border-radius: 9px; cursor: pointer; }
+  button:hover { filter: brightness(1.1); }
+  .toast { color: var(--muted); opacity: 0; transition: opacity .2s; }
+  .toast.on { opacity: 1; }
+</style>
+</head>
+<body>
+<main>
+  <div class="stage"><div id="sig"></div></div>
+  <div class="bar">
+    <button id="copy">Copy signature</button>
+    <span class="toast" id="toast">Copied</span>
+  </div>
+</main>
+
+<script>
+// Design C, built for mail clients: tables, inline styles, square corners (Outlook can't round them),
+// a bgcolor cell for LinkedIn so Outlook draws it,
+// and styled alt text so the monogram still reads as a link when images are blocked.
+const SIG_LINKS = {
+  linkedin: "https://adambacch.us/go/linkedin/?src=email-sig",
+  github: "https://adambacch.us/go/github/?src=email-sig",
+  site: "https://adambacch.us/?src=email-sig",
+  studio: "https://browsea.surf/?src=email-sig",
+};
+const SIG_GIF = "https://adambacch.us/sig/ab-fade.gif";
+// GitHub's mark from Primer Octicons (MIT), white on GitHub's dark square, 3x for sharp screens
+const SIG_GITHUB_IMG = "https://adambacch.us/sig/github.png";
+
+function signatureC() {
+  const FONT = "'Segoe UI',Helvetica,Arial,sans-serif";
+  const L = SIG_LINKS;
+  // A fixed 18px square in its own cell, so the name row's line height can't stretch it
+  // With an image, the text becomes its styled alt text, shown on the same colored square when images are blocked
+  const LABEL = "font-family:Arial,Helvetica,sans-serif;font-size:10px;line-height:18px;font-weight:700;color:#ffffff;text-align:center;";
+  const icon = (href, title, text, color, img) => `<td width="18" height="18" bgcolor="${color}" align="center" valign="middle" style="width:18px;height:18px;min-width:18px;max-height:18px;background:${color};text-align:center;padding:0;"><a href="${href}" title="${title}" style="display:block;width:18px;height:18px;${LABEL}text-decoration:none;">${img
+    ? `<img src="${img}" width="18" height="18" alt="${text}" style="display:block;width:18px;height:18px;border:0;${LABEL}">`
+    : text}</a></td>`;
+  return `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:${FONT};color:#1f1d2b;"><tr>
+  <td valign="middle" width="46" style="width:46px;padding:0 10px 0 0;"><a href="${L.site}" style="text-decoration:none;"><img src="${SIG_GIF}" width="46" height="46" alt="Website" style="display:block;width:46px;height:46px;border:0;font-family:${FONT};font-size:10px;font-weight:700;line-height:46px;color:#4b3fd6;text-align:center;"></a></td>
+  <td valign="middle" style="border-left:2px solid #6d5dfc;padding:0 0 0 10px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;width:100%;"><tr>
+      <td valign="middle" width="1" style="width:1px;font-family:${FONT};font-size:15px;line-height:20px;font-weight:700;white-space:nowrap;"><a href="${L.site}" style="color:#1f1d2b;text-decoration:none;border-bottom:1.5px solid #cfc9fb;">Adam Bacchus</a><span style="font-size:10px;letter-spacing:.6px;color:#6d5dfc;">&nbsp;&nbsp;PMP</span></td>
+      <td valign="middle" align="center">
+        <table role="presentation" align="center" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin:0 auto;"><tr>
+          ${icon(L.linkedin, "LinkedIn", "in", "#0a66c2")}
+          <td width="4" style="width:4px;font-size:0;line-height:0;">&nbsp;</td>
+          ${icon(L.github, "GitHub", "gh", "#24292f", SIG_GITHUB_IMG)}
+        </tr></table>
+      </td>
+    </tr></table>
+    <div style="font-family:${FONT};font-size:12px;line-height:18px;color:#6b6880;padding-top:2px;white-space:nowrap;">PM &amp; Product Developer &middot; <a href="${L.studio}" style="color:#4b3fd6;font-weight:700;text-decoration:none;">Browsea&nbsp;&#8599;</a></div>
+  </td></tr></table>`;
+}
+
+const SIGNATURE = signatureC();
+const LINKS = SIG_LINKS;
+
+document.getElementById("sig").innerHTML = SIGNATURE;
+
+document.getElementById("copy").addEventListener("click", async () => {
+  const text = "Adam Bacchus, PMP\nProject Manager & Product Developer · Browsea\n" + Object.values(LINKS).join("\n");
+  let ok = false;
+  try {
+    await navigator.clipboard.write([new ClipboardItem({
+      "text/html": new Blob([SIGNATURE], { type: "text/html" }),
+      "text/plain": new Blob([text], { type: "text/plain" }),
+    })]);
+    ok = true;
+  } catch {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById("sig"));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    ok = document.execCommand("copy");
+    s.removeAllRanges();
+  }
+  const t = document.getElementById("toast");
+  t.textContent = ok ? "Copied" : "Copy blocked, select the signature and copy it by hand";
+  t.classList.add("on"); setTimeout(() => t.classList.remove("on"), 2200);
+});
+</script>
+</body>
+</html>

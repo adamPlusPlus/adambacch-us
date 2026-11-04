@@ -1,0 +1,384 @@
+/* adambacch.us/beta: the FeatSpec art test. Loaded after styles.css; only adds or overrides.
+   Motion lives behind html.b-anim (set by beta.js unless prefers-reduced-motion) and the media query below. */
+
+/* ---------- hero: plate, light sweep and milestone diamonds as one slow scene ---------- */
+.hero { position: relative; isolation: isolate; }
+.beta-hero-art { position: absolute; z-index: -1; top: -64px; bottom: -24px; left: 50%; width: 100vw; transform: translateX(-50%); overflow: hidden; pointer-events: none; background: #0b0a14; }
+.bh-plate { position: absolute; inset: -8% -6%; background: url(art/id04a-hero-plate.jpg) center 72% / cover no-repeat; translate: calc(var(--hx, 0) * -10px) calc(var(--hs, 0) * .28px); }
+.bh-sweep { position: absolute; inset: 0; mix-blend-mode: screen; opacity: 0;
+  background: linear-gradient(100deg, transparent 38%, rgba(255,226,150,.22) 48%, rgba(255,246,210,.32) 50%, rgba(255,226,150,.22) 52%, transparent 62%) 0 0 / 220% 100% no-repeat; }
+.beta-hero-art i { position: absolute; display: block; aspect-ratio: 1; translate: calc(var(--hx, 0) * var(--dz) * 1px) calc(var(--hy, 0) * var(--dz) * .7px + var(--hs, 0) * var(--sz) * 1px); }
+.beta-hero-art i b { position: absolute; inset: 0; background: url(art/id04b-diamond.webp) center / contain no-repeat; mix-blend-mode: screen; }
+.beta-hero-art .d1 { width: 150px; left: 6%; top: 18%; --dz: 26; --sz: -.32; }
+.beta-hero-art .d1 b { opacity: .34; }
+.beta-hero-art .d2 { width: 70px; left: 28%; top: 62%; --dz: 9; --sz: -.12; filter: blur(1.5px); }
+.beta-hero-art .d2 b { opacity: .2; }
+.beta-hero-art .d3 { width: 118px; right: 8%; top: 9%; --dz: 20; --sz: -.26; }
+.beta-hero-art .d3 b { opacity: .28; }
+.beta-hero-art .d4 { width: 54px; right: 26%; top: 70%; --dz: 6; --sz: -.08; filter: blur(2px); }
+.beta-hero-art .d4 b { opacity: .16; }
+.beta-hero-art .d5 { width: 40px; left: 47%; top: 6%; --dz: 4; --sz: -.05; filter: blur(2.5px); }
+.beta-hero-art .d5 b { opacity: .14; }
+.bh-fade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,10,20,.5) 0%, rgba(11,10,20,.18) 40%, rgba(11,10,20,.3) 75%, var(--ink, #0b0a14) 100%); }
+@media (max-width: 600px) {
+  .beta-hero-art .d1 { width: 86px; left: -10px; top: 8%; }
+  .beta-hero-art .d2 { width: 46px; left: 4%; top: 72%; }
+  .beta-hero-art .d3 { width: 70px; right: -8px; top: 4%; }
+  .beta-hero-art .d4 { display: none; }
+}
+.project-title { text-shadow: 0 2px 0 #000, 0 0 18px rgba(0,0,0,.6); }
+
+/* ---------- comic panels: art layers ---------- */
+.panel .e3-art { font-size: 42px; fill: #ff7a1a; stroke: #000; stroke-width: 3px; paint-order: stroke; }
+.panel .art-confetti { pointer-events: none; opacity: .72; }
+.panel text.lot-sm { font-size: 15px; text-anchor: middle; }
+.panel .st-over .isle-l { font-size: 10px !important; font-weight: 700; fill: #1b140b; paint-order: stroke; stroke: #fbf3dc; stroke-width: 3.2px; stroke-linejoin: round; }
+.panel .st-over .isle-hit { stroke: #3a2a14; stroke-width: 1.2; }
+.panel .st-over .isle2.sel .isle-hit, .panel .st-over .isle2:hover .isle-hit { fill: rgba(255,214,10,.18); }
+.panel .st-over .st-route { stroke: #3a2a14; }
+.panel[data-card="studio"].open { background: linear-gradient(rgba(11,10,20,.45), rgba(11,10,20,.45)), url(art/p4bg.jpg) center / cover; }
+.panel .bob-isle { mix-blend-mode: multiply; }
+.panel .beams, .panel .banner-glow, .panel .twinkle, .panel .felt-glow, .panel .screen-glow, .panel .warm-glow, .panel .spot, .panel .glint { mix-blend-mode: screen; pointer-events: none; }
+.panel .beams { opacity: .5; }
+.panel .banner-glow { opacity: .5; }
+.panel .felt-glow { opacity: .55; }
+.panel .screen-glow { opacity: .45; }
+.panel .warm-glow { opacity: .7; }
+.panel .spot { opacity: .6; }
+.panel .glint { opacity: 0; }
+.panel .twinkle image { opacity: 0; }
+.panel .steam { opacity: 0; }
+.panel .wave-lines { opacity: 0; }
+.panel .art-confetti .f2 { opacity: 0; }
+
+/* depth: plate, mid props, figures, foreground move by different amounts (beta.js sets --px/--py, -1..1) */
+.panel .lyr { translate: calc(var(--px, 0) * var(--dx, 0) * 1px) calc(var(--py, 0) * var(--dy, 0) * 1px); transition: translate .45s cubic-bezier(.2,.8,.2,1); }
+.panel .d0 { --dx: -6; --dy: -5; }
+.panel .d1 { --dx: 3; --dy: 2.5; }
+.panel .d2 { --dx: 7; --dy: 5; }
+.panel .d3 { --dx: 12; --dy: 9; }
+.panel.open .lyr { translate: none; }
+
+/* state overlays: a caption box for "in progress", a rubber stamp for "played"; the art stays visible */
+.panel.s-wip:not(.open) .hw, .panel.s-done:not(.open) .hd { opacity: 1; }
+.panel .st-wip .tbc-t { font: 900 13px var(--mono, monospace); letter-spacing: .06em; text-anchor: middle; fill: #000; }
+.panel .st-done .done-t { font: 900 19px var(--sans, sans-serif); letter-spacing: .04em; text-anchor: middle; fill: #c2410c; }
+
+/* every transformed piece pivots on itself unless set otherwise */
+.panel .adam, .panel .twinkle image, .panel .idle-crowd, .panel .idle-pulse, .panel .orbit, .panel .idle-keys, .panel .steam, .panel .ripple,
+.panel .bob-isle, .panel .idle-compass, .panel .idle-wheel, .panel .idle-tower, .panel .glint, .panel .warm-glow, .panel .wave-lines,
+.panel .fall, .panel .idle-gavel, .panel .beam, .panel .art-plate, .panel .b0, .panel .b1, .panel .b2, .panel .b3, .panel .b4 { transform-box: fill-box; transform-origin: 50% 50%; }
+.panel .adam { transform-origin: 50% 100%; }
+.panel .idle-fan { transform-box: view-box; transform-origin: 212px 214px; }
+.panel .beam { transform-origin: 50% 0; }
+.panel .idle-wheel { transform-origin: 50% 42%; }
+.panel .idle-tower { transform-origin: 50% 100%; }
+.panel .idle-gavel { transform-origin: 6% 60%; }
+.panel .b4 { transform-origin: 50% 100%; }
+
+/* push-in on play: the plate leans in behind the camera move, then carries on as the quest backdrop */
+.panel.open .art-plate { transform: scale(1.14); transition: transform 1.6s cubic-bezier(.25,.8,.25,1), filter 1.2s; }
+.panel.live .art-plate { filter: saturate(1.1); }
+.b-zoom { position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0; mix-blend-mode: screen;
+  background: repeating-conic-gradient(from 0deg at 50% 45%, rgba(255,255,255,0) 0 5deg, rgba(255,250,220,.55) 5deg 6.2deg);
+  -webkit-mask: radial-gradient(circle at 50% 45%, transparent 22%, #000 72%); mask: radial-gradient(circle at 50% 45%, transparent 22%, #000 72%); }
+
+/* open quests: the panel's own plate (dimmed) instead of the flat colour */
+.panel[data-card="spider"].open { background: linear-gradient(rgba(11,10,20,.5), rgba(11,10,20,.5)), url(art/p1bg.jpg) center / cover; }
+.panel[data-card="wip"].open { background: linear-gradient(rgba(11,10,20,.6), rgba(11,10,20,.6)), url(art/p3bg.jpg) center / cover; }
+.panel[data-card="certified"].open { background: linear-gradient(rgba(11,10,20,.45), rgba(11,10,20,.45)), url(art/p5bg-mirrored.jpg) center / cover; }
+.panel[data-card="sniped"].open { background: linear-gradient(rgba(11,10,20,.55), rgba(11,10,20,.55)), url(art/p7bg.jpg) center / cover; }
+
+/* ---------- quest: One PMP question (stage s07d, answer panels s07b, spotlights s07c) ---------- */
+#panel-5 .pmp-q .exam { position: relative; isolation: isolate; gap: 6px; padding: 12px 12px 14px; border-radius: 12px; overflow: hidden;
+  background: url(art/s07d.jpg) center 40% / cover no-repeat, #111; border: 2px solid #000; }
+#panel-5 .pmp-q .exam::before, #panel-5 .pmp-q .exam::after { content: ""; position: absolute; z-index: -1; top: -6px; width: 30%; height: 100%; pointer-events: none;
+  background: url(art/s07c.webp) center top / contain no-repeat; opacity: .5; }
+#panel-5 .pmp-q .exam::before { left: -2%; transform: rotate(-10deg); transform-origin: 50% 0; }
+#panel-5 .pmp-q .exam::after { right: -2%; transform: scaleX(-1) rotate(-10deg); transform-origin: 50% 0; }
+#panel-5 .pmp-q .exam legend { float: left; width: 100%; margin: 0 0 4px; padding: 8px 10px; border-radius: 8px; background: rgba(255,250,235,.96); border: 2px solid #000; color: #111; }
+#panel-5 .pmp-q .opt { background: url(art/s07b.webp) center / 100% 100% no-repeat; border: 0; border-radius: 10px; color: #111; min-height: 50px; padding: 8px 34px 8px 14px; }
+#panel-5 .pmp-q .opt:hover { background: url(art/s07b.webp) center / 100% 100% no-repeat; filter: brightness(1.08) drop-shadow(0 0 5px rgba(255,214,10,.9)); }
+#panel-5 .pmp-q .opt.chosen { background: url(art/s07b.webp) center / 100% 100% no-repeat; filter: drop-shadow(0 0 6px rgba(34,224,122,.95)); }
+
+/* ---------- quest: Bid on Adam (paddle s02a) ---------- */
+.paddle {
+  width: 92px; height: 155px; margin: 0 0 0 18px; padding: 0 12px 64px; border: 0; border-radius: 0; box-shadow: none;
+  background: url(art/s02a.webp) center / contain no-repeat; color: #000; filter: drop-shadow(3px 4px 0 rgba(0,0,0,.45));
+}
+.paddle::after { display: none; }
+
+/* ================= motion (only when allowed) ================= */
+@media (prefers-reduced-motion: no-preference) {
+  /* hero */
+  .b-anim .bh-plate { animation: bhDrift 26s ease-in-out infinite alternate; }
+  .b-anim .bh-sweep { animation: bhSweep 9s ease-in-out 1.5s infinite; }
+  .b-anim .beta-hero-art i b { animation: bhFloat 7s ease-in-out infinite alternate; }
+  .b-anim .beta-hero-art .d2 b { animation-duration: 9s; animation-delay: -3s; }
+  .b-anim .beta-hero-art .d3 b { animation-duration: 6s; animation-delay: -1.5s; }
+  .b-anim .beta-hero-art .d4 b { animation-duration: 11s; animation-delay: -5s; }
+  .b-anim .beta-hero-art .d5 b { animation-duration: 13s; animation-delay: -2s; }
+
+  /* entrance: the panel assembles itself, plate, props, Adam, foreground, then the words */
+  .b-anim .panel:not(.built) .b0, .b-anim .panel:not(.built) .b1, .b-anim .panel:not(.built) .b2,
+  .b-anim .panel:not(.built) .b3, .b-anim .panel:not(.built) .b4 { opacity: 0; }
+  .b-anim .panel.built:not(.idle) .b0 { animation: bPlate .8s cubic-bezier(.2,.8,.2,1) backwards; }
+  .b-anim .panel.built:not(.idle) .b1 { animation: bDrop .6s .28s cubic-bezier(.2,1.3,.4,1) backwards; }
+  .b-anim .panel.built:not(.idle) .b2 { animation: bPop .65s .55s cubic-bezier(.2,1.5,.4,1) backwards; }
+  .b-anim .panel.built:not(.idle) .b3 { animation: bSlide .55s .8s cubic-bezier(.2,1.2,.4,1) backwards; }
+  .b-anim .panel.built:not(.idle) .b4 { animation: bBubble .45s 1.05s cubic-bezier(.2,1.6,.4,1) backwards; }
+
+  /* idle: each scene keeps moving a little; paused while off screen */
+  .b-anim .panel.off * { animation-play-state: paused !important; }
+  .pose-point { --idle: aPoint 3.4s ease-in-out infinite; }
+  .pose-shake { --idle: aShake 1.6s ease-in-out infinite; }
+  .pose-exec { --idle: aShake 1.6s ease-in-out -.8s infinite; }
+  .pose-type { --idle: aType 2.8s ease-in-out infinite; }
+  .pose-cheer { --idle: aCheer 1.8s ease-in-out infinite alternate; }
+  .pose-thumb { --idle: aThumb 2.2s ease-in-out infinite; }
+  .pose-wave { --idle: aWave 1.9s ease-in-out infinite alternate; }
+  .pose-proud { --idle: aProud 3s ease-in-out infinite; }
+  .b-anim .panel.idle .adam { animation: var(--idle); }
+  .b-anim .panel.idle .panel-btn:hover .adam { animation: var(--idle), aHop .6s cubic-bezier(.3,1.4,.5,1); }
+
+  .b-anim .panel.idle .idle-fan { animation: aFan 3.2s ease-in-out infinite alternate; }
+  .b-anim .panel.idle .twinkle image { animation: aTwinkle 2.2s ease-in-out infinite; }
+  .b-anim .panel.idle .twinkle .tw2 { animation-delay: -.8s; animation-duration: 1.8s; }
+  .b-anim .panel.idle .twinkle .tw3 { animation-delay: -1.5s; animation-duration: 2.6s; }
+  .b-anim .panel.idle .felt-glow { animation: aGlow 4s ease-in-out infinite alternate; }
+
+  .b-anim .panel.idle .idle-crowd { animation: aCrowd 5s ease-in-out infinite alternate; }
+  .b-anim .panel.idle .beam { animation: aBeam 5.5s ease-in-out infinite alternate; }
+  .b-anim .panel.idle .bm2 { animation-delay: -2.7s; animation-direction: alternate-reverse; }
+  .b-anim .panel.idle .banner-glow { animation: aGlow 2.4s ease-in-out infinite alternate; }
+  .b-anim .panel.idle .idle-pulse { animation: aPulse 1.3s ease-in-out infinite alternate; }
+
+  .b-anim .panel.idle .orbit { animation: aOrbit 7s linear infinite; }
+  .b-anim .panel.idle .o2 { animation-duration: 6s; animation-delay: -1s; animation-direction: reverse; }
+  .b-anim .panel.idle .o3 { animation-duration: 8s; animation-delay: -2.5s; }
+  .b-anim .panel.idle .o4 { animation-duration: 6.5s; animation-delay: -4s; animation-direction: reverse; }
+  .b-anim .panel.idle .o5 { animation-duration: 7.5s; animation-delay: -3s; }
+  .b-anim .panel.idle .o6 { animation-duration: 5.5s; animation-delay: -1.8s; animation-direction: reverse; }
+  .b-anim .panel.idle .o7 { animation-duration: 8.5s; animation-delay: -5s; }
+  .b-anim .panel.idle .screen-glow { animation: aFlicker 3.3s steps(1) infinite; }
+  .b-anim .panel.idle .idle-keys { animation: aKeys .32s steps(2) infinite; }
+  .b-anim .panel.idle .steam { animation: aSteam 2.6s ease-out infinite; }
+
+  .b-anim .panel.idle .ripple { animation: aRipple 4.5s ease-in-out infinite alternate; }
+  .b-anim .panel.idle .r2 { animation-delay: -2.2s; }
+  .b-anim .panel.idle .bob-isle { animation: aIsle 3.4s ease-in-out infinite alternate; }
+  .b-anim .panel.idle .i2 { animation-delay: -1.7s; }
+  .b-anim .panel.idle .idle-wheel { animation: aWheel 3.4s ease-in-out infinite alternate; }
+  .b-anim .panel.idle .idle-compass { animation: aCompass 2.6s ease-in-out infinite alternate; }
+
+  .b-anim .panel.idle .idle-tower { animation: aTower 2.4s ease-in-out infinite alternate; }
+  .b-anim .panel.idle .glint { animation: aGlint 5s ease-in-out 1s infinite; }
+
+  .b-anim .panel.idle .warm-glow { animation: aWarm 3.2s ease-in-out infinite alternate; }
+  .b-anim .panel.idle .wave-lines { animation: aLines 1.9s ease-in-out infinite alternate; }
+
+  .b-anim .panel.idle .spot { animation: aGlow 2.6s ease-in-out infinite alternate; }
+  .b-anim .panel.idle .fall { animation: aFall 7s linear infinite; }
+  .b-anim .panel.idle .f2 { animation-delay: -3.5s; }
+  .b-anim .panel.idle .idle-gavel { animation: aGavel 2.2s cubic-bezier(.5,0,.3,1) infinite; }
+
+  /* the push-in flash when a quest opens */
+  .panel.pushing .b-zoom { animation: bZoom .7s ease-out; }
+
+  /* rest of the page: sections rise in once; Gantt bars grow one after another */
+  .b-anim .sheet.b-pre { opacity: 0; transform: translateY(26px); transition: opacity .6s ease, transform .7s cubic-bezier(.2,.9,.3,1); }
+  .b-anim .sheet.b-pre.seen { opacity: 1; transform: none; }
+  .b-anim .g-row:nth-child(2) .g-bar { transition-delay: .12s; }
+  .b-anim .g-row:nth-child(3) .g-bar { transition-delay: .24s; }
+  .b-anim .g-row:nth-child(4) .g-bar { transition-delay: .36s; }
+  .b-anim .g-row:nth-child(5) .g-bar { transition-delay: .48s; }
+  .b-anim .g-row:nth-child(6) .g-bar { transition-delay: .6s; }
+  .b-anim .g-row:nth-child(7) .g-bar { transition-delay: .72s; }
+}
+
+@keyframes bhDrift { from { transform: scale(1.04) translateX(-1.5%); } to { transform: scale(1.12) translateX(1.5%); } }
+@keyframes bhSweep { 0% { opacity: 0; background-position: 120% 0; } 12% { opacity: 1; } 55% { opacity: 1; background-position: -20% 0; } 60%, 100% { opacity: 0; background-position: -20% 0; } }
+@keyframes bhFloat { from { transform: translateY(-8px) rotate(-4deg); } to { transform: translateY(10px) rotate(5deg); } }
+
+@keyframes bPlate { from { opacity: 0; transform: scale(1.12); filter: blur(3px); } }
+@keyframes bDrop { from { opacity: 0; transform: translateY(-22px) rotate(-3deg); } }
+@keyframes bPop { 0% { opacity: 0; transform: translateY(26px) scale(.9, 1.08); } 60% { opacity: 1; transform: translateY(-4px) scale(1.04, .96); } }
+@keyframes bSlide { from { opacity: 0; transform: translateY(24px) scale(.92); } }
+@keyframes bBubble { from { opacity: 0; transform: scale(.3) rotate(-6deg); } }
+@keyframes bZoom { 0% { opacity: 0; transform: scale(1.3); } 25% { opacity: 1; } 100% { opacity: 0; transform: scale(1); } }
+
+@keyframes aPoint { 0%, 100% { transform: rotate(0) scale(1); } 50% { transform: rotate(-1.4deg) scale(1.006, 1.016); } }
+@keyframes aShake { 0%, 100% { transform: translateY(0) rotate(0); } 30% { transform: translateY(2px) rotate(.8deg); } 60% { transform: translateY(-1px) rotate(-.4deg); } }
+@keyframes aType { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.004, 1.014); } 52%, 56% { transform: scale(1.004, 1.012) translateY(.6px); } }
+@keyframes aCheer { from { transform: translateY(0) rotate(-1deg) scale(1); } to { transform: translateY(-5px) rotate(1deg) scale(1.01, 1.02); } }
+@keyframes aThumb { 0%, 100% { transform: translateY(0) scale(1); } 40% { transform: translateY(-5px) scale(.99, 1.02); } 55% { transform: translateY(0) scale(1.03, .97); } 70% { transform: translateY(0) scale(1); } }
+@keyframes aWave { from { transform: rotate(-2.4deg); } to { transform: rotate(2deg) scale(1.005, 1.012); } }
+@keyframes aProud { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.012, 1.024); } }
+@keyframes aHop { 0% { transform: scale(1); } 30% { transform: scale(1.06, .92); } 60% { transform: translateY(-10px) scale(.96, 1.06); } 100% { transform: none; } }
+@keyframes aFan { from { transform: rotate(-2.5deg); } to { transform: rotate(2.5deg); } }
+@keyframes aTwinkle { 0%, 100% { opacity: 0; transform: scale(.6) rotate(0); } 50% { opacity: 1; transform: scale(1.1) rotate(25deg); } }
+@keyframes aGlow { from { opacity: .3; } to { opacity: .85; } }
+@keyframes aCrowd { from { transform: translateX(-5px); } to { transform: translateX(5px); } }
+@keyframes aBeam { from { transform: rotate(-16deg); } to { transform: rotate(16deg); } }
+@keyframes aPulse { from { transform: scale(1) rotate(0); } to { transform: scale(1.07) rotate(3deg); } }
+@keyframes aOrbit { from { transform: rotate(0deg) translateX(7px) rotate(0deg); } to { transform: rotate(360deg) translateX(7px) rotate(-360deg); } }
+@keyframes aFlicker { 0% { opacity: .35; } 30% { opacity: .55; } 45% { opacity: .4; } 70% { opacity: .6; } }
+@keyframes aKeys { 0% { transform: translateY(0); } 50% { transform: translateY(.7px); } }
+@keyframes aSteam { 0% { opacity: 0; transform: translateY(4px); } 30% { opacity: .9; } 100% { opacity: 0; transform: translateY(-8px); } }
+@keyframes aRipple { from { transform: translateX(-6px); opacity: .25; } to { transform: translateX(6px); opacity: .6; } }
+@keyframes aIsle { from { transform: translateY(-1px); } to { transform: translateY(1.5px); } }
+@keyframes aWheel { from { transform: rotate(-12deg); } to { transform: rotate(14deg); } }
+@keyframes aCompass { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
+@keyframes aTower { from { transform: rotate(-1.6deg) skewX(1deg); } to { transform: rotate(1.6deg) skewX(-1deg); } }
+@keyframes aGlint { 0% { opacity: 0; transform: translateX(-150px); } 10% { opacity: 1; } 45% { opacity: 1; transform: translateX(150px); } 50%, 100% { opacity: 0; transform: translateX(150px); } }
+@keyframes aWarm { from { transform: scale(.96); opacity: .55; } to { transform: scale(1.08); opacity: .9; } }
+@keyframes aLines { from { opacity: 0; } to { opacity: .9; } }
+@keyframes aFall { from { opacity: 0; transform: translateY(-180px) rotate(0); } 10% { opacity: .95; } 85% { opacity: .95; } to { opacity: 0; transform: translateY(300px) rotate(4deg); } }
+@keyframes aGavel { 0%, 55%, 100% { transform: rotate(0); } 70% { transform: rotate(-14deg); } 82% { transform: rotate(3deg); } 90% { transform: rotate(0); } }
+.panel.open .twinkle, .panel.open .wave-lines { display: none; }
+/* phones: the whole chart is smaller there, so the island markers and names grow */
+.panel.sheet-mode .st-over .isle-l { font-size: 14px !important; stroke-width: 4px; }
+.panel.sheet-mode .st-over .isle-n { r: 10px; }
+.panel.sheet-mode .st-over .isle-nt { font-size: 11px !important; }
+
+/* ---------- panel 2 quest: the POV takeover (e3.js) ---------- */
+.e3-back { position: absolute; z-index: 1; pointer-events: none; opacity: 0; transform-origin: 0 0; max-width: none;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.55)); }
+.panel:not(.open) .e3-back { display: none; }
+#panel-2.pov .panel-btn svg > use.pose-shake { animation: e3Turn .4s cubic-bezier(.5,0,.6,1) .05s both !important; }
+@keyframes e3Turn { 0% { transform: scaleX(1); opacity: 1; } 90% { transform: scaleX(.05); opacity: 1; } 100% { transform: scaleX(.05); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  #panel-2.pov .panel-btn svg > use.pose-shake { animation: none !important; opacity: 0; transition: opacity .3s; }
+  .e3-back { transition: opacity .35s ease; }
+}
+
+/* fix: `.panel svg { display: block }` outranks `.st-over { display: none }`, so once the chart quest had run, its
+   island overlay stayed in the panel's flow after closing and stretched the comic grid. Hide it outside the camera. */
+.panel svg.st-over { display: none; }
+.panel.cam svg.st-over { display: block; }
+/* in the over-the-shoulder shot the panel's own "Deal!" bubble would float over the scene */
+#panel-2.pov .panel-btn svg > g.bubble { opacity: 0 !important; transition: opacity .3s; }
+
+/* ---------- panel 2: first-person POV (e3.js) ---------- */
+.e3-vig { position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0;
+  background: radial-gradient(ellipse 75% 70% at 50% 42%, transparent 55%, rgba(5,4,10,.55) 85%, rgba(5,4,10,.9) 100%); }
+.panel:not(.open) .e3-vig { display: none; }
+.e3-back { will-change: transform, opacity, filter; }
+#panel-2.pov-return .panel-btn svg > use.pose-shake { animation: e3TurnBack .45s cubic-bezier(.3,1.3,.5,1) both !important; }
+@keyframes e3TurnBack { from { transform: scaleX(.05); opacity: 0; } 20% { opacity: 1; } to { transform: scaleX(1); opacity: 1; } }
+@media (prefers-reduced-motion: no-preference) {
+  /* a slow breathing drift of the first-person camera (individual properties, so comic.js's framing transform stays) */
+  #panel-2.pov.live .panel-btn svg { animation: e3Breath 5.5s ease-in-out 2.3s infinite alternate; }
+}
+@keyframes e3Breath { from { translate: 0 0; scale: 1; } to { translate: -3px -3px; scale: 1.014; } }
+@media (prefers-reduced-motion: reduce) { .e3-vig { transition: opacity .35s ease; } }
+@media (prefers-reduced-motion: no-preference) {
+  /* order: Adam turns first with the camera holding still, then the camera travels to the acquirer while it passes
+     through his head (e3.js). On close the camera eases off while it pulls back out. */
+  #panel-2.pov.open:not(.closing) .panel-btn svg { transition: transform 1.3s cubic-bezier(.45,0,.35,1) .7s, opacity .7s ease, filter .7s ease; }
+  #panel-2.pov.closing .panel-btn svg { transition: transform .4s cubic-bezier(.3,0,.3,1), opacity .4s ease, filter .4s ease; }
+  /* the dialogue arrives once the camera has landed */
+  #panel-2.pov.live:not(.closing) .pq-body { animation: e3Late .45s ease-out .85s both; }
+}
+@keyframes e3Late { from { opacity: 0; transform: translateY(10px); } }
+
+/* ---------- closing a quest: one view transition (comic.js vtClose) ---------- */
+html.ha-vt::view-transition-group(*) { animation-duration: .7s; animation-timing-function: cubic-bezier(.3,.8,.25,1); }
+html.ha-vt::view-transition-image-pair(*) { overflow: clip; }
+html.ha-vt::view-transition-old(*), html.ha-vt::view-transition-new(*) { height: 100%; object-fit: cover; object-position: 50% 0; animation-duration: .7s; }
+html.ha-vt::view-transition-old(*) { animation-timing-function: cubic-bezier(.4,0,.6,1); }
+html.ha-vt::view-transition-new(*) { animation-timing-function: cubic-bezier(.4,0,.6,1); }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation-duration: .2s !important; }
+}
+
+/* ---------- while a quest is open, it is the only panel in the comic ---------- */
+.comic:has(> .panel.open:not(.sheet-mode)) > .panel:not(.open) { display: none; }
+.comic:has(> .panel.open.sheet-mode) > .panel:not(.open) { visibility: hidden; }
+/* opening: the rest of the page cross-fades on the same curve as the quest's camera */
+html.ha-vt-open::view-transition-old(root), html.ha-vt-open::view-transition-new(root) { animation-duration: .45s; animation-timing-function: cubic-bezier(.3,.8,.25,1); }
+
+/* ---------- selfie quest: camera-app controls (booth-ui.js) ---------- */
+#panel-6 .booth-teaser { display: none; }
+#panel-6 .booth { position: relative; }
+/* the bar sits at the bottom of the photo, just above the printed caption band (190 of the canvas's 1350 px) */
+.cam-bar { position: absolute; left: 0; right: 0; bottom: calc(14% + 24px); z-index: 3; display: flex; justify-content: center; align-items: center; gap: 16px; pointer-events: none; }
+.cam-bar > *, #panel-6 .cam-bar .cam-btn, #panel-6 .cam-bar .shutter, #panel-6 .cam-bar .ccap-btn { pointer-events: auto; }
+#panel-6 .cam-bar .cam-btn {
+  all: unset; position: relative; box-sizing: border-box; display: grid; place-items: center; width: 60px; height: 60px; border-radius: 50%; cursor: pointer;
+  color: #fff; background: rgba(11,10,20,.55); border: 3px solid #fff; box-shadow: 0 0 0 3px rgba(0,0,0,.45), 0 6px 16px rgba(0,0,0,.4);
+  transition: transform .15s ease, background .2s ease;
+}
+#panel-6 .cam-bar .cam-btn::before { content: none; }
+#panel-6 .cam-bar .cam-glyph { width: 28px; height: 28px; display: block; }
+#panel-6 .cam-bar .cam-l { position: absolute; top: calc(100% + 5px); left: 50%; transform: translateX(-50%); white-space: nowrap;
+  font: 800 10.5px var(--mono, monospace); letter-spacing: .06em; text-transform: uppercase; color: #fff; text-shadow: 0 1px 3px #000; }
+#panel-6 .cam-bar .cam-btn:hover { background: rgba(194,65,12,.75); }
+#panel-6 .cam-bar .cam-btn:active { transform: scale(.92); }
+#panel-6 .cam-bar .cam-btn:focus-visible, #panel-6 .cam-bar .shutter:focus-visible, #panel-6 .cam-bar .ccap-btn:focus-visible { outline: 3px solid #ffd60a; outline-offset: 3px; }
+/* the camera is live (or a photo is in): the start button gives way to the shutter / the retake and save pair */
+.booth:has(#boothShot:not([hidden])) #openSelfie, .booth:has(#boothRetake:not([hidden])) #openSelfie { display: none; }
+#panel-6 .cam-bar .shutter {
+  all: unset; position: relative; box-sizing: border-box; display: block; width: 66px; height: 66px; border-radius: 50%; cursor: pointer;
+  border: 4px solid #fff; background: rgba(0,0,0,.25); box-shadow: 0 0 0 2px rgba(0,0,0,.45), 0 6px 16px rgba(0,0,0,.4);
+}
+#panel-6 .cam-bar .shutter[hidden] { display: none; }
+#panel-6 .cam-bar .shutter::after { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: #fff; transition: transform .12s ease, background .12s ease; }
+#panel-6 .cam-bar .shutter:hover::after { background: #f2f0ea; }
+#panel-6 .cam-bar .shutter:active::after, #panel-6 .cam-bar .shutter.fired::after { transform: scale(.82); background: #e8e4da; }
+#panel-6 .cam-bar .shutter.fired { animation: camFire .35s ease-out; }
+@keyframes camFire { 40% { transform: scale(.92); } }
+.booth.flash::before { content: ""; position: absolute; inset: 0; z-index: 4; background: #fff; pointer-events: none; animation: camFlash .45s ease-out forwards; }
+@keyframes camFlash { from { opacity: .85; } to { opacity: 0; } }
+/* retake and save: small pills either side of the shutter, like a camera app */
+#panel-6 .cam-bar .ccap-btn {
+  all: unset; box-sizing: border-box; padding: 7px 11px; border-radius: 999px; cursor: pointer; white-space: nowrap;
+  font: 800 11px var(--mono, monospace); letter-spacing: .03em; color: #fff; background: rgba(11,10,20,.62); border: 1.5px solid rgba(255,255,255,.8);
+  box-shadow: 0 4px 10px rgba(0,0,0,.35);
+}
+#panel-6 .cam-bar .ccap-btn[hidden] { display: none; }
+#panel-6 .cam-bar .cam-btn, #panel-6 .cam-bar .shutter, #panel-6 .cam-bar .ccap-btn { pointer-events: auto; }
+#panel-6 .cam-bar .ccap-btn:active { transform: scale(.94); }
+@media (prefers-reduced-motion: reduce) { #panel-6 .cam-bar .shutter.fired, .booth.flash::before { animation: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  /* when the comic cross-fades into the quest first, the camera waits for that too (e3.js waits the same 0.45 s) */
+  html.ha-vt-open #panel-2.pov.open:not(.closing) .panel-btn svg { transition-delay: 1.15s; }
+  html.ha-vt-open #panel-2.pov.live:not(.closing) .pq-body { animation-delay: 1.3s; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.ha-vt-open #panel-2.pov .panel-btn svg > use.pose-shake { animation-delay: .5s !important; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* the camera's delay must not wait for e3.js's class: it is set from the panel's own state */
+  #panel-2.open:not(.closing) .panel-btn svg { transition: transform 1.3s cubic-bezier(.45,0,.35,1) .7s, opacity .7s ease, filter .7s ease; }
+  html.ha-vt-open #panel-2.open:not(.closing) .panel-btn svg { transition-delay: 1.15s; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* the front view finishes turning away before the back view turns in; the camera moves with the push after it */
+  #panel-2.open:not(.closing) .panel-btn svg { transition-delay: 1s; }
+  html.ha-vt-open #panel-2.open:not(.closing) .panel-btn svg { transition-delay: 1.45s; }
+  #panel-2.pov.live:not(.closing) .pq-body { animation-delay: 1.15s; }
+  html.ha-vt-open #panel-2.pov.live:not(.closing) .pq-body { animation-delay: 1.6s; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  #panel-2.open:not(.closing) .panel-btn svg { transition-delay: .85s; }
+  html.ha-vt-open #panel-2.open:not(.closing) .panel-btn svg { transition-delay: 1.3s; }
+  #panel-2.pov.live:not(.closing) .pq-body { animation-delay: 1s; }
+  html.ha-vt-open #panel-2.pov.live:not(.closing) .pq-body { animation-delay: 1.45s; }
+}
+/* the front view's turn is scripted in e3.js now; reduced motion keeps the plain fade */
+@media (prefers-reduced-motion: no-preference) { #panel-2.pov .panel-btn svg > use.pose-shake { animation: none !important; } }
+@media (prefers-reduced-motion: no-preference) {
+  #panel-2.open:not(.closing) .panel-btn svg { transition-delay: .73s; }
+  html.ha-vt-open #panel-2.open:not(.closing) .panel-btn svg { transition-delay: 1.18s; }
+}
+
+/* hero pitch (2026-11-02): the one-line case from the closing section, up where a skimming reader sees it */
+.pt-block { display: grid; justify-items: center; text-align: center; }
+.pt-pitch { margin: 2px 0 10px; max-width: 34ch; font-size: clamp(15px, 4vw, 18px); line-height: 1.4; color: var(--text, #f3efe6); text-shadow: 0 1px 0 #000, 0 0 12px rgba(0,0,0,.6); }
+.pt-pitch b { color: var(--yellow); }
+@media (min-width: 980px) {
+  .pt-block { grid-area: title; justify-self: start; justify-items: start; text-align: left; }
+  .pt-block .project-title { grid-area: auto; }
+  .pt-pitch { margin: 14px 0 0; max-width: 520px; font-size: 19px; }
+}
