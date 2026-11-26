@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Adam Bacchus · business card (AI SWE)</title>
+<style>
+:root{--ink:#0b0a14;--y:#ffd60a;--c:#29d3ff;--v:#7b5cff;--paper:#fff}
+*{box-sizing:border-box}
+html,body{margin:0;background:#15131f;color:#fff;font:16px/1.4 system-ui,Segoe UI,Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:20px;margin:0 0 4px}
+p.note{margin:0 0 20px;color:#b9b6cc}
+.cards{display:grid;gap:20px;grid-template-columns:1fr}
+@media (min-width:640px){.cards{grid-template-columns:1fr 1fr}}
+.card{aspect-ratio:7/4;border-radius:10px;padding:6%;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;box-shadow:0 10px 30px #0008}
+.front{background:radial-gradient(120% 120% at 0 0,#1d1a33,#0b0a14 60%);color:#fff;border:2px solid var(--y)}
+.front .name{font-size:clamp(20px,5.2vw,30px);font-weight:800;letter-spacing:.2px}
+.front .role{color:var(--y);font-weight:700;font-size:clamp(12px,3.2vw,16px);margin-top:2px}
+.front .line{color:#d7d4ea;font-size:clamp(11px,2.8vw,14px)}
+.front .tag{font:700 clamp(10px,2.4vw,12px) ui-monospace,Consolas,monospace;color:var(--c);letter-spacing:.5px}
+.back{background:var(--paper);color:var(--ink);flex-direction:row;align-items:center;gap:6%}
+.back img{height:100%;aspect-ratio:1;display:block}
+.back .t{display:flex;flex-direction:column;gap:6px}
+.back b{font-size:clamp(13px,3.4vw,18px);line-height:1.2}
+.back span{font-size:clamp(10px,2.5vw,12px);color:#444}
+.back code{font:700 clamp(10px,2.5vw,12px) ui-monospace,Consolas,monospace;color:#5b3fd6}
+@media print{
+  @page{size:3.5in 2in;margin:0}
+  html,body{background:#fff}
+  main{max-width:none;padding:0}
+  h1,p.note{display:none}
+  .cards{display:block}
+  .card{width:3.5in;height:2in;aspect-ratio:auto;border-radius:0;box-shadow:none;page-break-after:always;padding:.2in}
+}
+</style>
+</head>
+<body>
+<main>
+<h1>Adam Bacchus · business card, AI SWE edition</h1>
+<p class="note">Front and back at 3.5 × 2 in. Print this page for a proof (each side is one page). The QR opens https://adambacch.us/swe/</p>
+<div class="cards">
+  <section class="card front" aria-label="Card front">
+    <div><div class="name">Adam Bacchus</div><div class="role">Software Architect</div><div class="line">AI-driven development</div></div>
+    <div>
+      <div class="line">Houston, TX · (832) 844-7118</div>
+      <div class="line">bacchus.adam@pm.me · github.com/adamPlusPlus</div>
+      <div class="tag">DESIGN IT ONCE. LET THE AGENTS BUILD IT.</div>
+    </div>
+  </section>
+  <section class="card back" aria-label="Card back">
+    <img src="qr.svg" alt="QR code to Adam Bacchus's architecture review">
+    <div class="t"><b>Scan for the design review</b><span>Systems, specs and AI agents on one architecture.</span><code>adambacch.us/swe</code></div>
+  </section>
+</div>
+</main>
+</body>
+</html>
